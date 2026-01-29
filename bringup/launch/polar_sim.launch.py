@@ -4,9 +4,9 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     position_node = Node(
-            package="polar",
-            executable="position",
-            name="position",
+            package="polar_system",
+            executable="polar",
+            name="polar",
             parameters=[{
                 # Topics / frame
                 'topic_pose': "/mavros/local_position/pose",
@@ -60,39 +60,14 @@ def generate_launch_description():
                 'pid_yaw_kp': 1.5, 'pid_yaw_ki': 1.0, 'pid_yaw_kd': 0.24, 'pid_yaw_max_i': 0.4, 'pid_yaw_max_out': 6.0, 'pid_yaw_deriv_tau': 0.0, 'pid_yaw_d_clip': 0.05,
             }]
         )
-    
-    rc = Node(
-            package="polar",
-            executable="controller_interface",
-            name="controller_interface",
-            parameters=[{
-                'v_r_max': 1.0,
-                'v_thetha_max': 2.0,
-                'v_z_max': 0.5,
-                'talk' : False,
-            }]
-        )
 
     one_shot_fake = Node(
-        package = 'polar',
-        executable = 'one_shot_fake_target',
+        package = 'polar_system',
+        executable = 'fake_polar_target',
         name = 'one_shot'
     )
-
-    control = Node(
-        package = 'mission',
-        executable = 'control',
-        name = 'control'
-    )
-    
     
     ld.add_action(position_node)
     ld.add_action(one_shot_fake)
-    ld.add_action(control)
-
-    launch_rc = False
-    if launch_rc:
-        ld.add_action(rc)
-    
 
     return ld
