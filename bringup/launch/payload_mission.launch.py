@@ -20,9 +20,16 @@ def generate_launch_description():
         executable="control_nav",
         name="control_nav",
     )
+    
+    mission_stats_controller = Node(
+        package="mission_stats_controller",
+        executable="mission_stats_controller",
+        name="mission_stats_controller",
+    )
 
     ld.add_action(init)
     ld.add_action(convert)
     ld.add_action(control_nav)
+    ld.add_action(mission_stats_controller)
     
     return ld
