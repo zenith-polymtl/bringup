@@ -7,6 +7,12 @@ def generate_launch_description():
         package="nav_stack",
         executable="init",
         name="init",
+        parameters=[
+            {"static_tf.parent_frame_name": "gimbal_link",
+            "static_tf.child_frame_name": "zed_link",
+            "static_tf.translation": [0.0, 0.0, 0.03], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
+            "static_tf.rotation": [0.0, 0.0, 0.0, 1.0]} #depend du 0 gimbal, jassume que identique
+        ]
     )
     
     convert = Node(
