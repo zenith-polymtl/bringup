@@ -18,6 +18,8 @@ def generate_launch_description():
                 'topic_activation': "/approach_activation",
                 'topic_ctrl_activation': "/controller_activation",
                 'topic_raw_setpoint': "/mavros/setpoint_raw/local",
+                'topic_reached_target': "/polar/reached_target",
+
                 'frame_id': "map",
 
                 # Rates / filters
