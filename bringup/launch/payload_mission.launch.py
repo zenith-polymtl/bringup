@@ -41,6 +41,11 @@ def generate_launch_description():
         executable="payload",
         name="PayloadController",
     )
+    rc_controller = Node(
+        package="remote_controller_interface",
+        executable="remote_controller_interface",
+        name="remote_control_interface",
+    )
 
     # ld.add_action(init)
     # ld.add_action(convert)
@@ -48,5 +53,6 @@ def generate_launch_description():
     # ld.add_action(mission_stats_controller)
     ld.add_action(drone_heatbeat)
     ld.add_action(servo_controller)
+    ld.add_action(rc_controller)
     
     return ld
