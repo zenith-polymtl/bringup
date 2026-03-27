@@ -26,10 +26,27 @@ def generate_launch_description():
         executable="mission_stats_controller",
         name="mission_stats_controller",
     )
+    
+    drone_heatbeat = Node(
+        package="tools",
+        executable="drone_heartbeat",
+        name="drone_heartbeat",
+        parameters=[{
+            'topic_name': "/aeac/external/drone_heartbeat",
+            'heartbeat_rate': 1.0,
+        }],
+    )    
+    servo_controller = Node(
+        package="payload",
+        executable="payload",
+        name="PayloadController",
+    )
 
-    ld.add_action(init)
-    ld.add_action(convert)
-    ld.add_action(control_nav)
-    ld.add_action(mission_stats_controller)
+    # ld.add_action(init)
+    # ld.add_action(convert)
+    # ld.add_action(control_nav)
+    # ld.add_action(mission_stats_controller)
+    ld.add_action(drone_heatbeat)
+    ld.add_action(servo_controller)
     
     return ld
