@@ -80,6 +80,16 @@ def generate_launch_description():
         }]
     )
     
+    image_capture = Node(
+        package="shoot_and_capture",
+        executable="image_capture",
+        name="image_capture",
+        parameters=[{
+            'image_topic' : "/camera/image",
+            'save_dir' : '/aeac/workspaces/water_ws/snapshots'
+        }]
+    )
+    
     position_node = Node(
         package="polar_system",
         executable="polar",
@@ -141,13 +151,14 @@ def generate_launch_description():
         }]
     )
 
-    ld.add_action(init)
+    # ld.add_action(init)
     # ld.add_action(convert)
     # ld.add_action(control_nav)
     # ld.add_action(gimbal_test_node)
     # ld.add_action(gimbal_controller)
     # ld.add_action(rgb_yolo)
-    # ld.add_action(mission_stats_controller)
+    ld.add_action(mission_stats_controller)
+    ld.add_action(image_capture)
     # ld.add_action(target_mock)
     # ld.add_action(position_node)
 
