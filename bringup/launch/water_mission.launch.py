@@ -99,6 +99,16 @@ def generate_launch_description():
         }]
     )
     
+    drone_heatbeat = Node(
+        package="tools",
+        executable="drone_heartbeat",
+        name="drone_heartbeat",
+        parameters=[{
+            'topic_name': "/aeac/external/drone_heartbeat",
+            'heartbeat_rate': 1.0,
+        }],
+    ) 
+    
     position_node = Node(
             package="polar_system",
             executable="polar",
@@ -169,6 +179,7 @@ def generate_launch_description():
     ld.add_action(mission_stats_controller)
     ld.add_action(image_capture)
     ld.add_action(stereo_yolo)
+    ld.add_action(drone_heatbeat)
     # ld.add_action(target_mock)
     ld.add_action(position_node)
 
