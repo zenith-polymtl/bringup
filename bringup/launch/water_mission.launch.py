@@ -10,11 +10,20 @@ def generate_launch_description():
         executable="init",
         name="init",
         parameters=[
-            {"static_tf.parent_frame_name": "base_link",
+            {"static_tf.parent_frame_name": "map",
+            "static_tf.child_frame_name": "zed_camera_link",
+            "static_tf.translation": [0.084, 0.0, -0.126], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
+            "static_tf.rotation": [0.0, -0.382683, 0.0, 0.923880]} #depend du 0 gimbal, jassume que identique
+        ]
+        '''
+        self.declare_parameter("static_tf.parent_frame_name", "gimbal_link")
+        self.declare_parameter("static_tf.child_frame_name", "camera_link")
+        self.declare_parameter("static_tf.translation", [0.084, 0.0, -0.126])
+        self.declare_parameter("static_tf.rotation", [0.0, -0.382683, 0.0, 0.923880])
+        "static_tf.parent_frame_name": "base_link",
             "static_tf.child_frame_name": "zed_camera_link",
             "static_tf.translation": [0.0, 0.0, 0.03], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
-            "static_tf.rotation": [0.0, 0.0, 0.0, 1.0]} #depend du 0 gimbal, jassume que identique
-        ]
+            "static_tf.rotation": [0.0, 0.0, 0.0, 1.0]'''
     )
     
     convert = Node(
