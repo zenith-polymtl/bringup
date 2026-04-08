@@ -10,22 +10,24 @@ def generate_launch_description():
         executable="init",
         name="init",
         parameters=[
-            {"static_tf.parent_frame_name": "map",
-            "static_tf.child_frame_name": "zed_camera_link",
-            "static_tf.translation": [0.084, 0.0, -0.126], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
-            "static_tf.rotation": [0.0, -0.382683, 0.0, 0.923880]} #depend du 0 gimbal, jassume que identique
+            {
+                "static_tf.parent_frame_name": "base_link",
+                "static_tf.child_frame_name": "zed_camera_link",
+                "static_tf.translation": [0.084, 0.0, -0.126], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
+                "static_tf.rotation": [0.0, -0.382683, 0.0, 0.923880],
+            } #depend du 0 gimbal, jassume que identique
         ]
-        '''
-        self.declare_parameter("static_tf.parent_frame_name", "gimbal_link")
-        self.declare_parameter("static_tf.child_frame_name", "camera_link")
-        self.declare_parameter("static_tf.translation", [0.084, 0.0, -0.126])
-        self.declare_parameter("static_tf.rotation", [0.0, -0.382683, 0.0, 0.923880])
-        "static_tf.parent_frame_name": "base_link",
-            "static_tf.child_frame_name": "zed_camera_link",
-            "static_tf.translation": [0.0, 0.0, 0.03], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
-            "static_tf.rotation": [0.0, 0.0, 0.0, 1.0]'''
     )
-    
+    '''
+    self.declare_parameter("static_tf.parent_frame_name", "gimbal_link")
+    self.declare_parameter("static_tf.child_frame_name", "camera_link")
+    self.declare_parameter("static_tf.translation", [0.084, 0.0, -0.126])
+    self.declare_parameter("static_tf.rotation", [0.0, -0.382683, 0.0, 0.923880])
+    "static_tf.parent_frame_name": "base_link",
+    "static_tf.child_frame_name": "zed_camera_link",
+    "static_tf.translation": [0.0, 0.0, 0.03], # A mesure : Camera est 3 cm en haut (XYZ = FLU)
+    "static_tf.rotation": [0.0, 0.0, 0.0, 1.0]
+    '''    
     convert = Node(
         package="nav_stack",
         executable="convert",
@@ -103,7 +105,7 @@ def generate_launch_description():
         executable="image_capture",
         name="image_capture",
         parameters=[{
-            'image_topic' : "/zed/zed_node/rgb/color/rect/image",
+            'image_topic' : "/zed/zed_node/rgb/color/rect/image/compressed",
             'save_dir' : '/aeac/workspaces/water_ws/snapshots'
         }]
     )
@@ -175,7 +177,7 @@ def generate_launch_description():
                 # pid_z_hold
                 'pid_z_hold_kp': 0.3, 'pid_z_hold_ki': 0.1, 'pid_z_hold_kd': 0.15, 'pid_z_hold_max_i': 0.5, 'pid_z_hold_max_out': 3.0, 'pid_z_hold_deriv_tau': 0.1, 'pid_z_hold_d_clip': 0.0,
                 # pid_yaw
-                'pid_yaw_kp': 1.0, 'pid_yaw_ki': 1.0, 'pid_yaw_kd': 0.24, 'pid_yaw_max_i': 1.2, 'pid_yaw_max_out': 15.0, 'pid_yaw_deriv_tau': 0.0, 'pid_yaw_d_clip': 0.05,
+                'pid_yaw_kp': 1.5, 'pid_yaw_ki': 1.0, 'pid_yaw_kd': 0.24, 'pid_yaw_max_i': 0.4, 'pid_yaw_max_out': 6.0, 'pid_yaw_deriv_tau': 0.0, 'pid_yaw_d_clip': 0.05,
             }]
         )
 
