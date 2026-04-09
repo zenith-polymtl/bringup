@@ -33,7 +33,7 @@ def generate_launch_description():
         executable="convert",
         name="convert",
         parameters=[{
-            'use_sim_time': True,
+            'use_sim_time': False,
         }]
     )
     
@@ -42,7 +42,7 @@ def generate_launch_description():
         executable="control_nav",
         name="control_nav",
         parameters=[{
-            'use_sim_time': True,
+            'use_sim_time': False,
         }]
     )
     
@@ -51,7 +51,8 @@ def generate_launch_description():
         executable="auto_approach",
         name="autonomous_approach",
         parameters=[{
-            'use_sim_time': True,
+            #'use_sim_time': True,
+            'sim': True,
         }]
     )
     
@@ -69,7 +70,7 @@ def generate_launch_description():
         executable="gimbal_mavros",
         name="gremsy_mavros_ctrl",
         parameters=[{
-            'use_sim_time': True,
+            'use_sim_time': False,
         }]
     )
     
@@ -78,7 +79,7 @@ def generate_launch_description():
         executable="gimbal_test",
         name="pid_tester_keys",
         parameters=[{
-            'use_sim_time': True,
+            'use_sim_time': False,
         }]
     )
     

@@ -12,7 +12,7 @@ def generate_launch_description():
                 'topic_pose': "/mavros/local_position/pose",
                 'topic_vel': "/mavros/local_position/velocity_local",
                 'topic_goal_polar': "/goal_pose_polar",
-                'topic_estimated_center': "/estimated_center_location",
+                'topic_estimated_center': "/polar/estimated_center_location",
                 'topic_activation': "/approach_activation",
                 'topic_ctrl_activation': "/controller_activation",
                 'topic_raw_setpoint': "/mavros/setpoint_raw/local",
