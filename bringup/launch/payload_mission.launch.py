@@ -47,10 +47,10 @@ def generate_launch_description():
         name="remote_control_interface",
     )
 
-    # ld.add_action(init)
-    # ld.add_action(convert)
-    # ld.add_action(control_nav)
-    # ld.add_action(mission_stats_controller)
+    ld.add_action(init)
+    ld.add_action(convert)
+    ld.add_action(control_nav)
+    ld.add_action(mission_stats_controller)
     ld.add_action(drone_heatbeat)
     ld.add_action(servo_controller)
     ld.add_action(rc_controller)
