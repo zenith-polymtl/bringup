@@ -11,10 +11,17 @@ def generate_launch_description():
                 # Topics / frame
                 'topic_pose': "/mavros/local_position/pose",
                 'topic_vel': "/mavros/local_position/velocity_local",
+<<<<<<< HEAD
                 'topic_goal_polar': "/polar/goal_pose_polar",
                 'topic_estimated_center': "/polar/estimated_center_location",
                 'topic_activation': "/polar/approach_activation",
                 'topic_ctrl_activation': "/polar/controller_activation",
+=======
+                'topic_goal_polar': "/goal_pose_polar",
+                'topic_estimated_center': "/polar/estimated_center_location",
+                'topic_activation': "/approach_activation",
+                'topic_ctrl_activation': "/controller_activation",
+>>>>>>> ac29cf9b20290e86306d9bac6c50e807b6ed66c9
                 'topic_raw_setpoint': "/mavros/setpoint_raw/local",
                 'topic_reached_target': "/polar/reached_target",
                 'frame_id': "map",
