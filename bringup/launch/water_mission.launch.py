@@ -118,6 +118,15 @@ def generate_launch_description():
             'heartbeat_rate': 1.0,
         }],
     ) 
+
+    valve = Node(
+        package="water_payload",
+        executable="valve",
+        name="valve",
+        parameters=[{
+            ''
+        }],
+    ) 
     
     position_node = Node(
             package="polar_system",
