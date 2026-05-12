@@ -48,14 +48,14 @@ def generate_launch_description():
 
         # ── RANSAC ───────────────────────────────────────────────────────
         DeclareLaunchArgument('ransac_dist',       default_value='0.03'),
-        DeclareLaunchArgument('ransac_iterations', default_value='150'),
+        DeclareLaunchArgument('ransac_iterations', default_value='50'),
         DeclareLaunchArgument('min_inlier_ratio',  default_value='0.50'),
         DeclareLaunchArgument('padding_ratio',     default_value='0.20'),
 
         # ── Synchronisation ──────────────────────────────────────────────
-        DeclareLaunchArgument('sync_tolerance',  default_value='1.50'),
-        DeclareLaunchArgument('image_tolerance', default_value='5.00'),
-        DeclareLaunchArgument('buffer_size',     default_value='60'),
+        DeclareLaunchArgument('sync_tolerance',  default_value='8.00'),
+        DeclareLaunchArgument('image_tolerance', default_value='10.00'),
+        DeclareLaunchArgument('buffer_size',     default_value='2'),
 
         # ── Plans coplanaires ────────────────────────────────────────────
         DeclareLaunchArgument('plane_sim_thresh',  default_value='0.85'),
@@ -125,6 +125,7 @@ def generate_launch_description():
             'buffer_size':       buf_size,
             'plane_sim_thresh':  plane_sim,
             'plane_dist_thresh': plane_dist,
+            'objects_topic':     objects_topic,
         }],
     )
 
@@ -139,7 +140,7 @@ def generate_launch_description():
             name       = 'scene_descriptor_node',
             output     = 'screen',
             arguments  = ['--ros-args', '--log-level', log_level],
-            parameters = [{'drone_heading_deg': heading}],
+            parameters = [{'drone_heading_deg': heading, 'objects_topic': objects_topic}],
         )],
     )
 
@@ -153,7 +154,12 @@ def generate_launch_description():
             executable = 'image_overlay',
             name       = 'overlay_node',
             output     = 'screen',
-            arguments  = ['--ros-args', '--log-level', log_level],
+            arguments = [
+            '--ros-args', '--log-level', log_level,
+            '-p', ['objects_topic:=', objects_topic],
+            '-p', ['image_width:=',   bbox_w],
+            '-p', ['image_height:=',  bbox_h],
+            ],
             parameters = [{
                 'objects_topic':    objects_topic,
                 'scene_text_topic': scene_text_topic,
