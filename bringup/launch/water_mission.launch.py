@@ -71,33 +71,7 @@ def generate_launch_description():
             'use_sim_time': False,
         }]
     )
-    
-    gimbal_test_node = Node(
-        package="gimbal_controller",
-        executable="gimbal_test",
-        name="pid_tester_keys",
-        parameters=[{
-            'use_sim_time': False,
-        }]
-    )
-    
-    rgb_yolo = Node(
-        package="vision",
-        executable="rgb_yolo",
-        name="rgb_yolo",
-        parameters=[{
-            'image_topic' : "/camera/camera_info"
-        }]
-    )
-    
-    stereo_yolo = Node(
-        package="vision",
-        executable="stereo_yolo",
-        name="stereo_yolo",
-        parameters=[{
-            'image_topic' : "/camera/camera_info"
-        }]
-    )
+
     
     image_capture = Node(
         package="shoot_and_capture",
@@ -107,6 +81,12 @@ def generate_launch_description():
             'image_topic' : "/zed/zed_node/rgb/color/rect/image/compressed",
             'save_dir' : '/aeac/workspaces/water_ws/snapshots'
         }]
+    )
+    
+    image_transfer = Node(
+        package="shoot_and_capture",
+        executable="image_transfer",
+        name="image_transfer"
     )
     
     drone_heatbeat = Node(
@@ -121,10 +101,10 @@ def generate_launch_description():
 
     valve = Node(
         package="water_payload",
-        executable="valve",
+        executable="valve_control",
         name="valve",
         parameters=[{
-            ''
+            'burst_time': 3.0
         }],
     ) 
     
@@ -189,17 +169,31 @@ def generate_launch_description():
             }]
         )
 
+    servo_node = Node(
+        package="water_payload",
+        executable="servo_control",
+        name="servo_controller",
+    )
+
+    rc_interface = Node(
+        package="remote_controller_interface",
+        executable="remote_controller_interface",
+        name="rc_interface",
+    )
+    
+    ld.add_action(valve)
+    ld.add_action(servo_node)
     ld.add_action(init)
     # ld.add_action(convert)
     # ld.add_action(control_nav)
     # ld.add_action(gimbal_test_node)
-    # ld.add_action(gimbal_controller)
-    # ld.add_action(rgb_yolo)
+    ld.add_action(gimbal_controller)
     ld.add_action(mission_stats_controller)
     ld.add_action(image_capture)
-    ld.add_action(stereo_yolo)
     ld.add_action(drone_heatbeat)
+    ld.add_action(image_transfer)
+    ld.add_action(rc_interface)
     # ld.add_action(target_mock)
-    ld.add_action(position_node)
+    #ld.add_action(position_node)
 
     return ld
