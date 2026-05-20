@@ -51,6 +51,7 @@ def generate_launch_description():
         parameters=[{
             #'use_sim_time': True,
             'sim': True,
+            'polar_distace' : 2.0,
         }]
     )
     
@@ -131,7 +132,7 @@ def generate_launch_description():
 
                 # Limits
                 'centripetal_limit': 1.5,
-                'minimal_margin': 2.0,
+                'minimal_margin': 1.5,
                 'soft_repulsion_initial_radius': 5.0,
 
                 # CSV log
@@ -178,7 +179,7 @@ def generate_launch_description():
             'topic_heading': "/mavros/global_position/compass_hdg",
             'topic_activation': "/aeac/internal/auto_approach/activate_polar",
             'topic_front_point': "/aeac/internal/auto_shoot/center_location",
-            'front_point_distance': 5.0,
+            'front_point_distance': 3.0,
         }]
     )
 
