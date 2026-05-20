@@ -41,6 +41,7 @@ def generate_launch_description():
         name="control_nav",
         parameters=[{
             'use_sim_time': False,
+            'polar_target_topic': "/aeac/internal/auto_approach/target_position"
         }]
     )
     
