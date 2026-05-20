@@ -169,6 +169,19 @@ def generate_launch_description():
             }]
         )
 
+    fake_front_target = Node(
+        package="polar_system",
+        executable="fake_front_target",
+        name="fake_front_target",
+        parameters=[{
+            'topic_pose': "/mavros/local_position/pose",
+            'topic_heading': "/mavros/global_position/compass_hdg",
+            'topic_activation': "/aeac/internal/auto_approach/activate_polar",
+            'topic_front_point': "/aeac/internal/auto_shoot/center_location",
+            'front_point_distance': 5.0,
+        }]
+    )
+
     servo_node = Node(
         package="water_payload",
         executable="servo_control",
@@ -193,7 +206,7 @@ def generate_launch_description():
     ld.add_action(drone_heatbeat)
     ld.add_action(image_transfer)
     ld.add_action(rc_interface)
-    # ld.add_action(target_mock)
-    #ld.add_action(position_node)
+    ld.add_action(position_node)
+    ld.add_action(fake_front_target)
 
     return ld
