@@ -54,7 +54,5 @@ def generate_launch_description():
     ld.add_action(drone_heatbeat)
     ld.add_action(servo_controller)
     ld.add_action(rc_controller)
-    ld.add_action(image_capture)
-    ld.add_action(image_transfer)
     
     return ld
